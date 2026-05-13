@@ -33,7 +33,7 @@ export const HomePage = () => {
       />
 
       {(data?.total ?? 0) > 0 && (
-        <Pagination total={data?.total} limit={12} />
+        <Pagination total={data?.total || 0} limit={12} />
       )}
 
     </div>
