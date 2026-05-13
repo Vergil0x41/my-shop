@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { getProducts } from "../api/getProducts"
+import type { ProductsResponse } from "../product"
 
 type Params = {
   search?: string;
@@ -10,7 +11,7 @@ type Params = {
 };
 
 export const useProducts = (params: Params) => {
-  return useQuery({
+  return useQuery<ProductsResponse>({
     queryKey: [
       "products",
       params.search || "",
@@ -22,6 +23,6 @@ export const useProducts = (params: Params) => {
 
     queryFn: () => getProducts(params),
 
-    keepPreviousData: true,
+    placeholderData: (prev) => prev,
   })
 }
