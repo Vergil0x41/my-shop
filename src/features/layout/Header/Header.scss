@@ -1,0 +1,135 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #eee;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__logo {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__search {
+    position: relative;
+    width: 320px;
+
+    &:hover .header__search-input {
+      border-color: #bbb;
+    }
+
+    &-input {
+      width: 100%;
+      padding: 10px 36px 10px 34px;
+
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      background: white;
+
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: black;
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 16px;
+    }
+
+    &-clear {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: 0.2s;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  &__cart {
+    position: relative;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-icon {
+      font-size: 20px;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+
+    background: black;
+    color: white;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    padding: 2px 6px;
+    border-radius: 999px;
+
+    min-width: 18px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 16px;
+
+    &__search {
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__search {
+      width: 140px;
+
+      &-input {
+        padding: 8px 30px 8px 30px;
+        font-size: 13px;
+      }
+    }
+  }
+}

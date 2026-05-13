@@ -1,0 +1,25 @@
+.chips {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 20px;
+
+  &__item {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+
+  &__item--active {
+    background: black;
+    color: white;
+    border-color: black;
+  }
+}

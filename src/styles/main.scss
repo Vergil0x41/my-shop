@@ -1,0 +1,22 @@
+@import url('./fonts.scss');
+
+:root {
+  --font-family: "Inter";
+  }
+//simple facts
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: var(--font-family);
+}
