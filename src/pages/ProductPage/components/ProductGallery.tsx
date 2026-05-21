@@ -35,12 +35,10 @@ export const ProductGallery = ({ images }: Props) => {
   return (
     <div className="gallery">
 
-      {/* MAIN IMAGE */}
       <div className="gallery__main">
 
         <img src={current} alt="product" />
 
-        {/* ARROWS */}
         <button className="gallery__btn left" onClick={prev}>
           ‹
         </button>
@@ -51,7 +49,6 @@ export const ProductGallery = ({ images }: Props) => {
 
       </div>
 
-      {/* THUMBNAILS */}
       <div className="gallery__thumbs">
 
         {safeImages.map((img, i) => (
