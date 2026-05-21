@@ -3,7 +3,6 @@ import { api } from "../../../shared/api/axios";
 type Product = {
   title: string;
   price: number;
-  rating: number;
   stock: number;
 }
 
@@ -19,9 +18,6 @@ export const sortProducts = (
 
     case "price-desc":
       return arr.sort((a, b) => b.price - a.price)
-
-    case "rating":
-      return arr.sort((a, b) => b.rating - a.rating)
 
     case "title-asc":
       return arr.sort((a, b) =>

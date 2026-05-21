@@ -12,10 +12,6 @@ export const SORT_OPTIONS = [
     value: "price-desc",
   },
   {
-    label: "Rating",
-    value: "rating",
-  },
-  {
     label: "Name: A to Z",
     value: "title-asc",
   },
