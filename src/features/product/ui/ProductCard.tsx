@@ -5,7 +5,7 @@ import "./ProductCard.scss"
 
 type Props = {
   product: any;
-};
+}
 
 export const ProductCard = ({ product }: Props) => {
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ export const ProductCard = ({ product }: Props) => {
       className="product-card"
       onClick={() => navigate(`/product/${product.id}`)}
     >
-      {/* IMAGE / SLIDER */}
       <div className="product-card__image">
         <img src={images[imgIndex]} alt={product.title} />
 
@@ -52,8 +51,8 @@ export const ProductCard = ({ product }: Props) => {
         )}
       </div>
 
-      {/* INFO */}
       <div className="product-card__info">
+
         <h3 className="product-card__title">
           {product.title}
         </h3>
@@ -61,6 +60,10 @@ export const ProductCard = ({ product }: Props) => {
         <div className="product-card__price">
           ${product.price}
         </div>
+
+        <p className="product-card__stock">Available: {product.stock}</p>
+
+        <p className="product-card__discount">-{product.discountPercentage}%</p>
 
         <button
           className="product-card__button"

@@ -24,7 +24,6 @@ export const Pagination = ({ total, limit }: Props) => {
     setParams(updated)
   };
 
-  // 🔥 window logic (ВАЖНО)
   const getPages = () => {
     const pages = []
 

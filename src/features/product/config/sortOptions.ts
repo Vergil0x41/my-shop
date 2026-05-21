@@ -15,4 +15,21 @@ export const SORT_OPTIONS = [
     label: "Rating",
     value: "rating",
   },
-];
+  {
+    label: "Name: A to Z",
+    value: "title-asc",
+  },
+  {
+    label: "Name: Z to A",
+    value: "title-desc",
+  },
+  {
+    label: "Stock: Low to High",
+    value: "stock-asc",
+  },
+  {
+    label: "Stock: High to Low",
+    value: "stock-desc",
+  },
+
+]
