@@ -1,4 +1,4 @@
-import { api } from "../../../shared/api/axios";
+import { api } from "../../../shared/api/axios"
 
 type Product = {
   title: string;
@@ -53,7 +53,7 @@ export const getProducts = async (params: any) => {
       {
         params: { limit, skip },
       }
-    );
+    )
 
     data = res.data
   }
@@ -65,7 +65,7 @@ export const getProducts = async (params: any) => {
         limit,
         skip,
       },
-    });
+    })
 
     data = res.data
   }
