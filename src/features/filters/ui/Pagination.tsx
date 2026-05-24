@@ -1,9 +1,7 @@
 import { useSearchParams } from "react-router-dom";
-import "./Pagination.scss";
-import * as ReactPaginateImport from 'react-paginate'
-
-
-const ReactPaginate = ReactPaginateImport.default?.default 
+import { Pagination as MuiPagination, Stack, Button } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import './Pagination.scss'
 
 type Props = {
   total: number;
@@ -13,37 +11,68 @@ type Props = {
 export const Pagination = ({ total, limit }: Props) => {
   const [params, setParams] = useSearchParams();
 
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   const page = Number(params.get("page") || 1);
-  const pageCount = Math.ceil(total / limit);
+  const pageCount = Math.max(1, Math.ceil((total || 0) / limit));
 
-  const handlePageChange = (event: any) => {
-    const selectedPage = event.selected + 1;
-
+  const setPage = (value: number) => {
     const updated = new URLSearchParams(params);
-    updated.set("page", String(selectedPage));
-
+    updated.set("page", String(value));
     setParams(updated);
   };
 
+  const handleChange = (_: any, value: number) => {
+    setPage(value);
+  };
+
+  const prev = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
+  const next = () => {
+    if (page < pageCount) setPage(page + 1);
+  };
+
+  if (!total || pageCount <= 1) return null;
+
   return (
     <div className="pagination">
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        previousLabel="<"
-        onPageChange={handlePageChange}
-        pageRangeDisplayed={2}
-        marginPagesDisplayed={1}
-        pageCount={pageCount}
-        forcePage={page - 1}
-        renderOnZeroPageCount={null}
-        containerClassName="pagination__container"
-        pageClassName="pagination__page"
-        activeClassName="active"
-        previousClassName="pagination__nav"
-        nextClassName="pagination__nav"
-        disabledClassName="disabled"
-      />
+      {!isMobile && (
+        <Stack spacing={2}>
+          <MuiPagination
+            count={pageCount}
+            page={page}
+            onChange={handleChange}
+            shape="rounded"
+            color="primary"
+          />
+        </Stack>
+      )}
+
+      {isMobile && (
+        <div className="pagination__mobile">
+          <Button
+            variant="outlined"
+            onClick={prev}
+            disabled={page === 1}
+          >
+            Prev
+          </Button>
+
+          <span className="pagination__page-info">
+            {page} / {pageCount}
+          </span>
+
+          <Button
+            variant="outlined"
+            onClick={next}
+            disabled={page === pageCount}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
