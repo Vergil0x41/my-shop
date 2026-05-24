@@ -1,5 +1,9 @@
 import { useSearchParams } from "react-router-dom";
 import "./Pagination.scss";
+import * as ReactPaginateImport from 'react-paginate'
+
+
+const ReactPaginate = ReactPaginateImport.default?.default 
 
 type Props = {
   total: number;
@@ -7,75 +11,39 @@ type Props = {
 };
 
 export const Pagination = ({ total, limit }: Props) => {
-  const [params, setParams] = useSearchParams()
+  const [params, setParams] = useSearchParams();
 
-  const page = Number(params.get("page") || 1)
-  const totalPages = Math.ceil(total / limit)
+  const page = Number(params.get("page") || 1);
+  const pageCount = Math.ceil(total / limit);
 
-  const changePage = (newPage: number) => {
-    const updated = new URLSearchParams(params)
+  const handlePageChange = (event: any) => {
+    const selectedPage = event.selected + 1;
 
-    if (newPage <= 1) {
-      updated.delete("page")
-    } else {
-      updated.set("page", String(newPage))
-    }
+    const updated = new URLSearchParams(params);
+    updated.set("page", String(selectedPage));
 
-    setParams(updated)
+    setParams(updated);
   };
-
-  const getPages = () => {
-    const pages = []
-
-    const start = Math.max(1, page - 1)
-    const end = Math.min(totalPages, page + 1)
-
-    if (start > 1) pages.push(1)
-    if (start > 2) pages.push("...")
-
-    for (let i = start; i <= end; i++) {
-      pages.push(i)
-    }
-
-    if (end < totalPages - 1) pages.push("...")
-    if (end < totalPages) pages.push(totalPages)
-
-    return pages;
-  }
-
-  const pages = getPages()
 
   return (
     <div className="pagination">
-
-      <button
-        disabled={page === 1}
-        onClick={() => changePage(page - 1)}
-      >
-        Prev
-      </button>
-
-      {pages.map((p, i) =>
-        p === "..." ? (
-          <span key={i} className="dots">...</span>
-        ) : (
-          <button
-            key={i}
-            className={page === p ? "active" : ""}
-            onClick={() => changePage(Number(p))}
-          >
-            {p}
-          </button>
-        )
-      )}
-
-      <button
-        disabled={page === totalPages}
-        onClick={() => changePage(page + 1)}
-      >
-        Next
-      </button>
-
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel=">"
+        previousLabel="<"
+        onPageChange={handlePageChange}
+        pageRangeDisplayed={2}
+        marginPagesDisplayed={1}
+        pageCount={pageCount}
+        forcePage={page - 1}
+        renderOnZeroPageCount={null}
+        containerClassName="pagination__container"
+        pageClassName="pagination__page"
+        activeClassName="active"
+        previousClassName="pagination__nav"
+        nextClassName="pagination__nav"
+        disabledClassName="disabled"
+      />
     </div>
-  )
-}
+  );
+};
